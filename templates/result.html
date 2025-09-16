@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Prediction Result</h2>
+    <p><strong>Prediction:</strong> {{ label }}</p>
+    <p><strong>Confidence:</strong> {{ confidence }}</p>
+
+    <h3>Uploaded Image:</h3>
+    <img src="{{ image_url }}" alt="Uploaded Image" style="max-width: 300px; height: auto;">
+
+    <br><br>
+    <a href="{{ url_for('predict_page') }}">Predict Another Image</a><br>
+    <a href="{{ url_for('history') }}">View Prediction History</a><br>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>

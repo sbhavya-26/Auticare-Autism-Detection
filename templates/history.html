@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Prediction History</h2>
+
+    {% if history %}
+        <table border="1" cellpadding="10">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Filename</th>
+                    <th>Prediction</th>
+                    <th>Confidence</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in history %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ record['Filename'] }}</td>
+                    <td>{{ record['Prediction'] }}</td>
+                    <td>{{ record['Confidence'] }}</td>
+                    <td>
+                        <form method="POST" action="{{ url_for('delete_record', row_id=loop.index0) }}" style="display:inline;">
+                            <button type="submit" title="Delete Record">🗑️</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No history available.</p>
+    {% endif %}
+
+    <br>
+    <a href="{{ url_for('predict_page') }}">Back to Prediction</a><br>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>
